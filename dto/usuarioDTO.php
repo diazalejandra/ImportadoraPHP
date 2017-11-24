@@ -1,6 +1,7 @@
 <?php
 
-class usuarioDTO {
+class usuarioDTO implements JsonSerializable {
+
     private $id_usuario;
     private $login_usuario;
     private $pass_usuario;
@@ -10,11 +11,11 @@ class usuarioDTO {
     private $edad_usuario;
     private $codigo_perfil;
     private $fechaNacimiento_usuario;
-    
+
     function __construct() {
         
     }
-    
+
     function getId_usuario() {
         return $this->id_usuario;
     }
@@ -85,6 +86,22 @@ class usuarioDTO {
 
     function setFechaNacimiento_usuario($fechaNacimiento_usuario) {
         $this->fechaNacimiento_usuario = $fechaNacimiento_usuario;
+    }
+
+    public function jsonSerialize() {
+        $jsonArray = array();
+
+        $jsonArray["id_usuario"] = $this->id_usuario;
+        $jsonArray["login_usuario"] = $this->login_usuario;
+        $jsonArray["pass_usuario"] = $this->pass_usuario;
+        $jsonArray["nombre_usuario"] = $this->nombre_usuario;
+        $jsonArray["apellido_usuario"] = $this->apellido_usuario;
+        $jsonArray["correo_usuario"] = $this->correo_usuario;
+        $jsonArray["edad_usuario"] = $this->edad_usuario;
+        $jsonArray["codigo_perfil"] = $this->codigo_perfil;
+        $jsonArray["fechaNacimiento_usuario"] = $this->fechaNacimiento_usuario;
+
+        return $jsonArray;     
     }
 }
 ?>

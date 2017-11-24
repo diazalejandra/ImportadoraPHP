@@ -3,7 +3,7 @@
 include_once '../db/conexion.php';
 include_once '../dto/usuarioDTO.php';
 
-class usuarioDAO {
+class usuarioDAO implements genericDAO {
 
     private $conexion;
 
