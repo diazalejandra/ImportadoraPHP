@@ -1,6 +1,15 @@
 <?php
+include_once '../db/conexion.php';
+include_once '../dto/productoDTO.php';
 
-class productoDAO implements genericDAO{
+class productoDAO implements genericDAO {
+
+    private $conexion;
+
+    public function __construct($conexion) {
+        $this->conexion = $conexion;
+    }
+
     public function actualizar($registro) {
         
     }
