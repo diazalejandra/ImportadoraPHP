@@ -1,44 +1,74 @@
 <?php
 
+include_once '../db/Conexion.php';
+
 class productoDTO implements JsonSerializable {
 
-    private $id_producto, $descripcion, $precio_unidad, $id_tipo;
+    private $id_producto;
+    private $descripcion;
+    private $precio_unidad;
+    private $id_tipo;
+    
+    private $con;
 
     function __construct() {
-        
+        $this->con = new Conexion();        
     }
 
-    function getId_producto() {
-        return $this->id_producto;
-    }
+       public function set($atributo, $contenido){
+            $this->$atributo = $contenido;
+        }
 
-    function getDescripcion() {
-        return $this->descripcion;
-    }
+        public function get($atributo){
+            return $this->$atributo;
+        }
 
-    function getPrecio_unidad() {
-        return $this->precio_unidad;
-    }
+        public function listar(){
+            $sql = "SELECT id_producto, descripcion, precio_unidad, id_tipo FROM producto";
+            $resultado = $this->con->consultaRetorno($sql);
+            return $resultado;
+        }
 
-    function getId_tipo() {
-        return $this->id_tipo;
-    }
+        public function crear(){
+            $sql2 = "SELECT id_producto FROM producto WHERE id_producto = {$this->id_producto}";
+            $resultado = $this->con->consultaRetorno($sql2);
+            $num = mysql_num_rows($resultado);
 
-    function setId_producto($id_producto) {
-        $this->id_producto = $id_producto;
-    }
+            if($num != 0){
+                return false;
+            }else{
+                $sql = "INSERT INTO producto(descripcion, precio_unidad, id_tipo) VALUES (
+                    '{$this->descripcion}', {$this->precio_unidad}, {$this->id_tipo})";
+                $this->con->consultaSimple($sql);
+                return true;
+            }
+        }
 
-    function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
-    }
+        public function eliminar(){
+            $sql = "DELETE FROM producto WHERE id_producto = {$this->id_producto}";
+            $this->con->consultaSimple($sql);
+        }
 
-    function setPrecio_unidad($precio_unidad) {
-        $this->precio_unidad = $precio_unidad;
-    }
+        public function ver(){
+            $sql = "SELECT id_producto, descripcion, precio_unidad, id_tipo FROM producto WHERE id_producto = {$this->id_producto}";
+            $resultado = $this->con->consultaRetorno($sql);
+            $row = mysql_fetch_assoc($resultado);
 
-    function setId_tipo($id_tipo) {
-        $this->id_tipo = $id_tipo;
-    }
+            //Set
+            $this->id_producto= $row['id_producto'];
+            $this->descripcion = $row['descripcion'];        
+            $this->precio_unidad = $row['precio_unidad'];        
+            $this->id_tipo = $row['id_tipo'];        
+
+            return $row;
+        }
+
+        public function editar(){
+            $sql = "UPDATE producto SET descripcion = '{$this->descripcion}', precio_unidad = {$this->precio_unidad}"
+            . " WHERE id_producto = {$this->id_producto}";
+            $this->con->consultaSimple($sql);
+        }
+     
 
     public function jsonSerialize() {
         $jsonArray = array();

@@ -1,5 +1,7 @@
 <?php
 
+include_once '../db/Conexion.php';
+
 class usuarioDTO implements JsonSerializable {
 
     private $id_usuario;
@@ -11,82 +13,81 @@ class usuarioDTO implements JsonSerializable {
     private $edad_usuario;
     private $codigo_perfil;
     private $fechaNacimiento_usuario;
+    
+    private $con;
 
     function __construct() {
-        
+         $this->con = new Conexion();          
     }
 
-    function getId_usuario() {
-        return $this->id_usuario;
-    }
+       public function set($atributo, $contenido){
+            $this->$atributo = $contenido;
+        }
 
-    function getLogin_usuario() {
-        return $this->login_usuario;
-    }
+        public function get($atributo){
+            return $this->$atributo;
+        }
 
-    function getPass_usuario() {
-        return $this->pass_usuario;
-    }
+        public function listar(){
+            $sql = "SELECT id_usuario, login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario,"
+                    . " edad_usuario, codigo_perfil, fechaNacimiento_usuario FROM usuario";
+            $resultado = $this->con->consultaRetorno($sql);
+            return $resultado;
+        }
 
-    function getNombre_usuario() {
-        return $this->nombre_usuario;
-    }
+        public function crear(){
 
-    function getApellido_usuario() {
-        return $this->apellido_usuario;
-    }
+            $sql2 = "SELECT id_usuario FROM usuario WHERE id_usuario = {$this->id_usuario}";
+            $resultado = $this->con->consultaRetorno($sql2);
+            $num = mysql_num_rows($resultado);
 
-    function getCorreo_usuario() {
-        return $this->correo_usuario;
-    }
+            if($num != 0){
+                return false;
+            }else{
+                $sql = "INSERT INTO usuario (login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario,"
+                        . " edad_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ("
+                        . "'{$this->login_usuario}', '{$this->pass_usuario}', '{$this->nombre_usuario}', '{$this->apellido_usuario}', "
+                        . "'{$this->correo_usuario}', {$this->edad_usuario}, '{$this->codigo_perfil}', '{$this->fechaNacimiento_usuario}')";
+                $this->con->consultaSimple($sql);
+                return true;
+            }
+        }
 
-    function getEdad_usuario() {
-        return $this->edad_usuario;
-    }
+        public function eliminar(){
+            $sql = "DELETE FROM usuario WHERE id_usuario = {$this->id_usuario}";
+            $this->con->consultaSimple($sql);
+        }
 
-    function getCodigo_perfil() {
-        return $this->codigo_perfil;
-    }
+        public function ver(){
+            $sql = "SELECT id_usuario, login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario,"
+                    . " edad_usuario, codigo_perfil, fechaNacimiento_usuario"
+                    . " FROM usuario"
+                    . " WHERE id_usuario = {$this->id_usuario}";
+            $resultado = $this->con->consultaRetorno($sql);
+            $row = mysql_fetch_assoc($resultado);
 
-    function getFechaNacimiento_usuario() {
-        return $this->fechaNacimiento_usuario;
-    }
+            //Set
+            $this->id_usuario= $row['id_usuario'];
+            $this->login_usuario = $row['login_usuario'];
+            $this->pass_usuario = $row['pass_usuario'];
+            $this->nombre_usuario = $row['nombre_usuario'];
+            $this->apellido_usuario = $row['apellido_usuario'];
+            $this->correo_usuario = $row['correo_usuario'];
+            $this->edad_usuario = $row['edad_usuario'];
+            $this->codigo_perfil = $row['codigo_perfil'];
+            $this->fechaNacimiento_usuario = $row['fechaNacimiento_usuario'];
+     
+            return $row;
+        }
 
-    function setId_usuario($id_usuario) {
-        $this->id_usuario = $id_usuario;
-    }
-
-    function setLogin_usuario($login_usuario) {
-        $this->login_usuario = $login_usuario;
-    }
-
-    function setPass_usuario($pass_usuario) {
-        $this->pass_usuario = $pass_usuario;
-    }
-
-    function setNombre_usuario($nombre_usuario) {
-        $this->nombre_usuario = $nombre_usuario;
-    }
-
-    function setApellido_usuario($apellido_usuario) {
-        $this->apellido_usuario = $apellido_usuario;
-    }
-
-    function setCorreo_usuario($correo_usuario) {
-        $this->correo_usuario = $correo_usuario;
-    }
-
-    function setEdad_usuario($edad_usuario) {
-        $this->edad_usuario = $edad_usuario;
-    }
-
-    function setCodigo_perfil($codigo_perfil) {
-        $this->codigo_perfil = $codigo_perfil;
-    }
-
-    function setFechaNacimiento_usuario($fechaNacimiento_usuario) {
-        $this->fechaNacimiento_usuario = $fechaNacimiento_usuario;
-    }
+        public function editar(){
+            $sql = "UPDATE usuario SET login_usuario = '{$this->login_usuario}', pass_usuario = '{$this->pass_usuario}',"
+            . " nombre_usuario = '{$this->nombre_usuario}', apellido_usuario = '{$this->apellido_usuario}',"
+            . " correo_usuario = '{$this->correo_usuario}', edad_usuario = {$this->edad_usuario}, codigo_perfil = '{$this->codigo_perfil}',"
+            . " fechaNacimiento_usuario = '{$this->fechaNacimiento_usuario}'"
+            . " WHERE id_usuario = {$this->id_usuario}";
+            $this->con->consultaSimple($sql);
+        }
 
     public function jsonSerialize() {
         $jsonArray = array();

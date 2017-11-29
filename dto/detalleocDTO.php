@@ -1,45 +1,76 @@
 <?php
 
+include_once '../db/Conexion.php';
+
 class detalleocDTO implements JsonSerializable {
 
-    private $id_oc, $id_producto, $cantidad, $sub_total;
+    private $id_oc;
+    private $id_producto;
+    private $cantidad;
+    private $sub_total;
+    
+    private $con;
 
     function __construct() {
+        $this->con = new Conexion();
+    }
+
+        public function set($atributo, $contenido){
+            $this->$atributo = $contenido;
+        }
+
+        public function get($atributo){
+            return $this->$atributo;
+        }
+
+        public function listar(){
+            $sql = "SELECT id_oc, id_producto, cantidad, sub_total FROM detalle_oc";
+            $resultado = $this->con->consultaRetorno($sql);
+            return $resultado;
+        }
+
+        public function crear(){
+
+            $sql2 = "SELECT id_oc FROM detalle_oc WHERE id_oc = {$this->id_oc} and id_producto = ($this->id_producto)";
+            $resultado = $this->con->consultaRetorno($sql2);
+            $num = mysql_num_rows($resultado);
+
+            if($num != 0){
+                return false;
+            }else{
+                $sql = "INSERT INTO detalle_oc (id_oc, id_producto, cantidad, sub_total) VALUES (
+                    {$this->id_oc}, {$this->id_producto}, {$this->cantidad}, {$this->sub_total})";
+                $this->con->consultaSimple($sql);
+                return true;
+            }
+        }
+
+        public function eliminar(){
+            $sql = "DELETE FROM detalle_oc WHERE id_oc = {$this->id_oc} and id_producto = ($this->id_producto)";
+            $this->con->consultaSimple($sql);
+        }
+
+        public function ver(){
+            $sql = "SELECT id_oc, id_producto, cantidad, sub_total"
+                    . " FROM detalle_oc"
+                    . " WHERE id_oc = {$this->id_oc} and id_producto = ($this->id_producto)";
+            $resultado = $this->con->consultaRetorno($sql);
+            $row = mysql_fetch_assoc($resultado);
+
+            //Set
+            $this->id_oc= $row['id_oc'];
+            $this->id_producto = $row['id_producto'];
+            $this->cantidad = $row['cantidad'];
+            $this->sub_total = $row['sub_total'];         
+
+            return $row;
+        }
+
+        public function editar(){
+            $sql = "UPDATE detalle_oc SET cantidad = '{$this->cantidad}', sub_total = '{$this->sub_total}' WHERE id_oc = '{$this->id_oc}' and id_producto = '($this->id_producto)'";
+            $this->con->consultaSimple($sql);
+        }
         
-    }
-
-    function getId_oc() {
-        return $this->id_oc;
-    }
-
-    function getId_producto() {
-        return $this->id_producto;
-    }
-
-    function getCantidad() {
-        return $this->cantidad;
-    }
-
-    function getSub_total() {
-        return $this->sub_total;
-    }
-
-    function setId_oc($id_oc) {
-        $this->id_oc = $id_oc;
-    }
-
-    function setId_producto($id_producto) {
-        $this->id_producto = $id_producto;
-    }
-
-    function setCantidad($cantidad) {
-        $this->cantidad = $cantidad;
-    }
-
-    function setSub_total($sub_total) {
-        $this->sub_total = $sub_total;
-    }
-
     public function jsonSerialize() {
         $jsonArray = array();
 

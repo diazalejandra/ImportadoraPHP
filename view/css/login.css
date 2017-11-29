@@ -59,3 +59,14 @@ body {
     color: #ffffff;
 }
 
+.register{
+    margin-top: 10px;
+    text-align: right;
+    color: white;
+}
+
+a:link, a:visited {
+    color: white;
+    text-decoration: none;
+    }
+

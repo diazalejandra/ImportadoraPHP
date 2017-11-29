@@ -1,51 +1,78 @@
 <?php
 
+include_once '../db/Conexion.php';
+
 class ordenCompraDTO implements JsonSerializable{
-    private $id_oc, $fecha_emision, $total_oc, $estado, $id_usuario;
+    private $id_oc;
+    private $fecha_emision;
+    private $total_oc;
+    private $estado;
+    private $id_usuario;
+    
+    private $con;
     
     function __construct() {
-        
+        $this->con = new Conexion();
     }
     
-    function getId_oc() {
-        return $this->id_oc;
-    }
+        public function set($atributo, $contenido){
+            $this->$atributo = $contenido;
+        }
 
-    function getFecha_emision() {
-        return $this->fecha_emision;
-    }
+        public function get($atributo){
+            return $this->$atributo;
+        }
 
-    function getTotal_oc() {
-        return $this->total_oc;
-    }
+        public function listar(){
+            $sql = "SELECT id_oc, fecha_emision, total_oc, estado, id_usuario FROM orden_compra";
+            $resultado = $this->con->consultaRetorno($sql);
+            return $resultado;
+        }
 
-    function getEstado() {
-        return $this->estado;
-    }
+        public function crear(){
 
-    function getId_usuario() {
-        return $this->id_usuario;
-    }
+            $sql2 = "SELECT id_oc FROM orden_compra WHERE id_oc = {$this->id_oc}";
+            $resultado = $this->con->consultaRetorno($sql2);
+            $num = mysql_num_rows($resultado);
 
-    function setId_oc($id_oc) {
-        $this->id_oc = $id_oc;
-    }
+            if($num != 0){
+                return false;
+            }else{
+                $sql = "INSERT INTO orden_compra (fecha_emision, total_oc, estado, id_usuario) VALUES ("
+                        . "'{$this->fecha_emision}', {$this->total_oc}, '{$this->estado}', {$this->id_usuario})";
+                $this->con->consultaSimple($sql);
+                return true;
+            }
+        }
 
-    function setFecha_emision($fecha_emision) {
-        $this->fecha_emision = $fecha_emision;
-    }
+        public function eliminar(){
+            $sql = "DELETE FROM orden_compra WHERE id_oc = {$this->id_oc}";
+            $this->con->consultaSimple($sql);
+        }
 
-    function setTotal_oc($total_oc) {
-        $this->total_oc = $total_oc;
-    }
+        public function ver(){
+            $sql = "SELECT id_oc, fecha_emision, total_oc, estado, id_usuario"
+                    . " FROM orden_compra"
+                    . " WHERE id_oc = {$this->id_oc}";
+            $resultado = $this->con->consultaRetorno($sql);
+            $row = mysql_fetch_assoc($resultado);
 
-    function setEstado($estado) {
-        $this->estado = $estado;
-    }
+            //Set
+            $this->id_oc= $row['id_oc'];
+            $this->fecha_emision = $row['fecha_emision'];
+            $this->total_oc = $row['total_oc'];
+            $this->estado = $row['estado'];         
+            $this->id_usuario = $row['id_usuario'];         
 
-    function setId_usuario($id_usuario) {
-        $this->id_usuario = $id_usuario;
-    }
+            return $row;
+        }
+
+        public function editar(){
+            $sql = "UPDATE orden_compra SET fecha_emision = '{$this->fecha_emision}', total_oc = {$this->total_oc},"
+            . " estado = '{$this->estado}', id_usuario = {$this->id_usuario}"
+            . " WHERE id_oc = {$this->id_oc}";
+            $this->con->consultaSimple($sql);
+        }
 
     public function jsonSerialize() {
         $jsonArray = array();
