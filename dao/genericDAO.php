@@ -2,11 +2,13 @@
 
 interface genericDAO {
 
-    function agregar($registro);
+    function agregar();
 
-    function eliminar($idRegistro);
+    function eliminar();
 
-    function actualizar($registro);
+    function actualizar();
 
-    function listarTodos();
+    function listar();
+    
+    function mostrar();
 }

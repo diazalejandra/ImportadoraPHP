@@ -1,53 +1,46 @@
 <?php
-include_once '../db/conexion.php';
+
 include_once '../dto/detalleocDTO.php';
 
 class detalleocDAO implements genericDAO {
-    private $conexion;
 
-    public function __construct($conexion) {
-        $this->conexion = $conexion;
+    private $detalleoc;
+
+    public function __construct() {
+        $this->detalleoc = new detalleocDTO();
     }
 
-    public function actualizar($registro) {
-        
+    public function actualizar($id_oc, $id_producto, $cantidad, $sub_total) {
+        $this->detalleoc->set('id_oc', $id_oc);
+        $this->detalleoc->set('id_producto', $id_producto);
+        $this->detalleoc->set('cantidad', $cantidad);
+        $this->detalleoc->set('sub_total', $sub_total);
+        $this->detalleoc->editar();
     }
 
-    public function agregar($registro) {
-         try
-        {
-            $db = new ConexionDB();
-            $id_oc = $registro->getId_oc();
+    public function agregar($id_oc, $id_producto, $cantidad, $sub_total) {
+        $this->detalleoc->set('id_oc', $id_oc);
+        $this->detalleoc->set('id_producto', $id_producto);
+        $this->detalleoc->set('cantidad', $cantidad);
+        $this->detalleoc->set('sub_total', $sub_total);
 
-            
-            
-            $paciente = $dto->getId_paciente();
-            /* @var $profesional type */
-            $profesional = $dto->getId_profesional();
-            /* @var $fecha type */
-            $fecha = $dto->getFecha();
-            /* @var $hora type */
-            $hora = $dto->getHora();
-             
-            $stmt = $db->prepare("INSERT INTO RESERVA VALUES(?,?,?,?)");
-            $stmt->bindParam(1, $paciente);
-            $stmt->bindParam(2, $profesional);
-            $stmt->bindParam(3, $fecha);
-            $stmt->bindParam(4, $hora);
-            return $stmt->execute();
-            
-        } catch (Exception $ex) {
-            echo "Error SQL al agregar ". $ex->getMessage();
-        }
-        return false;        
+        $resultado = $this->detalleoc->crear();
+        return $resultado;
     }
 
-    public function eliminar($idRegistro) {
-        
+    public function eliminar($id_oc) {
+        $this->detalleoc->set("id_oc", $id_oc);
+        $this->detalleoc->eliminar();
     }
 
-    public function listarTodos() {
-        
+    public function listar() {
+        $resultado = $this->detalleoc->listar();
+        return $resultado;
     }
 
+    public function mostrar($id_oc) {
+        $this->detalleoc->set("id_oc", $id_oc);
+        $datos = $this->detalleoc->ver();
+        return $datos;
+    }
 }
