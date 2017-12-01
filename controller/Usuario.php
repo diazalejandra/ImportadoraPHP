@@ -5,7 +5,7 @@ include_once '../model/UsuarioModel.php';
 
 class Usuario {
 
-    public function listar() {
+    public static function listar() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_usuario, login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario,"
@@ -62,7 +62,7 @@ class Usuario {
         return false;
     }
 
-    public function eliminar($id_usuario) {
+    public static function eliminar($id_usuario) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM usuario WHERE id_usuario = ?");
@@ -74,7 +74,7 @@ class Usuario {
         return $respuesta;
     }
 
-    public function ver($id_usuario) {
+    public static function ver($id_usuario) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_usuario, login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario,"
@@ -102,7 +102,7 @@ class Usuario {
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_usuario = $dto->getId_usuario();

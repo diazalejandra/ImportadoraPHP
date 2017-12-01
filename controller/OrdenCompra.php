@@ -5,7 +5,7 @@ require_once '../model/OrdenCompraModel.php';
 
 class OrdenCompra {
 
-    public function listar() {
+    public static function listar() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_oc, fecha_emision, total_oc, estado, id_usuario FROM orden_compra");
@@ -27,7 +27,7 @@ class OrdenCompra {
         return $lista;
     }
 
-    public function crear($dto) {
+    public static function crear($dto) {
         try {
             $db = new ConexionDB();
             $id_oc = $dto->getId_oc();
@@ -48,7 +48,7 @@ class OrdenCompra {
         return false;
     }
 
-    public function eliminar($id_oc) {
+    public static function eliminar($id_oc) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM orden_compra WHERE id_oc = ?");
@@ -60,7 +60,7 @@ class OrdenCompra {
         return $respuesta;
     }
 
-    public function ver($id_oc) {
+    public static function ver($id_oc) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_oc, fecha_emision, total_oc, estado, id_usuario FROM orden_compra WHERE id_oc = ?");
@@ -83,7 +83,7 @@ class OrdenCompra {
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_oc = $dto->getId_oc();

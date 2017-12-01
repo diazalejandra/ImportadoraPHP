@@ -52,7 +52,7 @@ else{
                         <li><a href="./agregarPerfil.php">Perfiles</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="./agregarProducto.php">Productos</a></li>
-                        <li><a href="./agregarTipoProducto.php">Tipos de Productos</a></li>
+                        <li><a href="./tipoProducto.php">Tipos de Productos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

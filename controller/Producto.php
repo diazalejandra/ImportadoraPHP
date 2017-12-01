@@ -5,7 +5,7 @@ require_once '../model/ProductoModel.php';
 
 class Producto {
 
-    public function listar() {
+    public static function listar() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_producto, descripcion, precio_unidad, id_tipo FROM producto");
@@ -26,7 +26,7 @@ class Producto {
         return $lista;
     }
 
-    public function crear($dto) {
+    public static function crear($dto) {
         try {
             $db = new ConexionDB();
             $id_producto = $dto->getId_producto();
@@ -45,7 +45,7 @@ class Producto {
         return false;
     }
 
-    public function eliminar($id_producto) {
+    public static function eliminar($id_producto) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM producto WHERE id_producto = ?");
@@ -57,7 +57,7 @@ class Producto {
         return $respuesta;
     }
 
-    public function ver($id_producto) {
+    public static function ver($id_producto) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_producto, descripcion, precio_unidad, id_tipo FROM producto WHERE id_producto = ?");
@@ -79,7 +79,7 @@ class Producto {
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_producto = $dto->getId_producto();

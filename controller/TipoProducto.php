@@ -5,13 +5,14 @@ require_once '../model/TipoProductoModel.php';
 
 class TipoProducto{
 
-    public function listar() {
+    public static function listar() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_tipoproducto, descripcion_tipo FROM tipo_producto");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
+            
             foreach ($resultado as $value) {
                 $dto = new TipoProductoModel();
                 $dto->setId_tipoproducto($value["id_tipoproducto"]);
@@ -24,7 +25,7 @@ class TipoProducto{
         return $lista;
     }
 
-    public function crear($dto) {
+    public static function crear($dto) {
         try {
             $db = new ConexionDB();
             $id_tipoproducto = $dto->getId_tipoproducto();
@@ -39,7 +40,7 @@ class TipoProducto{
         return false;
     }
 
-    public function eliminar($id_tipoproducto) {
+    public static function eliminar($id_tipoproducto) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM tipo_producto WHERE id_tipoproducto = ?");
@@ -51,7 +52,7 @@ class TipoProducto{
         return $respuesta;
     }
 
-    public function ver($id_tipoproducto) {
+    public static function ver($id_tipoproducto) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_tipoproducto, descripcion_tipo FROM tipo_producto WHERE id_tipoproducto = ?");
@@ -71,7 +72,7 @@ class TipoProducto{
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_tipoproducto = $dto->getId_tipoproducto();

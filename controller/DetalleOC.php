@@ -5,7 +5,7 @@ require_once '../model/DetalleOCModel.php.php';
 
 class DetalleOC {
 
-    public function listar() {
+    public static function listar() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_oc, id_producto, cantidad, sub_total FROM detalle_oc");
@@ -26,7 +26,7 @@ class DetalleOC {
         return $lista;
     }
 
-    public function crear($dto) {
+    public static function crear($dto) {
         try {
             $db = new ConexionDB();
             $id_oc = $dto->getId_oc();
@@ -46,7 +46,7 @@ class DetalleOC {
         return false;
     }
 
-    public function eliminar($id_oc, $id_producto) {
+    public static function eliminar($id_oc, $id_producto) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM detalle_oc WHERE id_oc = ? and id_producto = ?");
@@ -59,7 +59,7 @@ class DetalleOC {
         return $respuesta;
     }
 
-    public function ver() {
+    public static function ver() {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_oc, id_producto, cantidad, sub_total FROM detalle_oc "
@@ -83,7 +83,7 @@ class DetalleOC {
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_oc = $dto->getId_oc();

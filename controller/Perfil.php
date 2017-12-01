@@ -40,7 +40,7 @@ class Perfil {
         return false;
     }
 
-    public function eliminar($id_perfil) {
+    public static function eliminar($id_perfil) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("DELETE FROM perfil WHERE id_perfil = ?");
@@ -52,7 +52,7 @@ class Perfil {
         return $respuesta;
     }
 
-    public function ver($id_perfil) {
+    public static function ver($id_perfil) {
         try {
             $pdo = new ConexionDB();
             $stmt = $pdo->prepare("SELECT id_perfil, descripcion_perfil FROM perfil WHERE id_perfil = ?");
@@ -72,7 +72,7 @@ class Perfil {
         return $lista;
     }
 
-    public function editar($dto) {
+    public static function editar($dto) {
         try {
             $db = new ConexionDB();
             $id_perfil = $dto->getId_perfil();
