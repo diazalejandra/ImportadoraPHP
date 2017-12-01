@@ -1,22 +1,3 @@
-<?php
-include_once './controller/Usuario.php';
-include_once './model/UsuarioModel.php';
-
-if (isset($_POST['btn_login'])) {
-    $usuario = new UsuarioModel();
-    $usuario->setLogin_usuario($_POST['txt_usuario']);
-    $usuario->setPass_usuario($_POST['password']);
-
-    if (Usuario::login($usuario)) {
-        session_start();
-        $_SESSION['userlogin'] = $usuario->getLogin_usuario();
-        echo "<script>location.href='./view/home.php';</script>";
-    } else {
-        echo "<script type=\"text/javascript\"> alert(\"Usuario o contraseña incorrecta\");</script>";
-        echo "<script>location.href='index.php';</script>";
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +15,7 @@ if (isset($_POST['btn_login'])) {
                 <div class="row">
                     <div class="login_box">
                         <section class="main-box">
-                            <form name="frm_login" action="" method="POST">
+                            <form name="frm_login" action="./view/home.php" method="POST">
                                 <div class="input-box">
                                     <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input id="txt_usuario" type="text" class="form-control input_layout" name="txt_usuario" placeholder="Usuario" minlength="1" required="">

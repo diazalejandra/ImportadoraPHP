@@ -1,7 +1,7 @@
 <?php
-include_once './controller/Perfil.php';
-include_once './controller/Usuario.php';
-include_once './model/UsuarioModel.php';
+include_once '../controller/Perfil.php';
+include_once '../controller/Usuario.php';
+include_once '../model/UsuarioModel.php';
 $lista = Perfil::listar();
 
 if (isset($_POST['btn_registro'])) {
@@ -12,7 +12,8 @@ if (isset($_POST['btn_registro'])) {
     $usuario->setApellido_usuario($_POST['apellido_usuario']);
     $usuario->setCorreo_usuario($_POST['correo_usuario']);
     $usuario->setEdad_usuario($_POST['edad_usuario']);
-    $usuario->setCodigo_perfil($_POST['cmb_perfil']);
+    //$usuario->setCodigo_perfil($_POST['cmb_perfil']);
+    $usuario->setCodigo_perfil('CON');
     $usuario->setFechaNacimiento_usuario($_POST['fechaNacimiento_usuario']);
 
     if (Usuario::crear($usuario)) {
@@ -32,8 +33,8 @@ if (isset($_POST['btn_registro'])) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <link href="https://bootswatch.com/3/yeti/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="view/css/login.css" rel="stylesheet" type="text/css">
-        <script src="view/js/agregar.js" ></script>
+        <link href="css/login.css" rel="stylesheet" type="text/css">
+        <script src="js/agregar.js" ></script>
     </head>
     <body>
         <div class="custom_body">
@@ -65,15 +66,6 @@ if (isset($_POST['btn_registro'])) {
                                 <div class="input-box">
                                     <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input id="edad_usuario" type="number" class="form-control input_layout" name="edad_usuario" placeholder="Edad" minlength="1" required="">
-                                </div>
-                                <div class="input-box">
-                                    <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <select id="cmb_perfil" name="cmb_perfil" required>
-                                        <option value="">Selecionar Perfil</option>
-                                        <?php foreach ($lista as $value) { ?>
-                                            <option value="<?php echo $value->getId_perfil(); ?>"><?php echo $value->getDescripcion_perfil(); ?></option>
-                                        <?php } ?>
-                                    </select>  
                                 </div>
                                 <div class="input-box">
                                     <span class="input-group-addon i_icon"><i class="glyphicon glyphicon-lock"></i></span>

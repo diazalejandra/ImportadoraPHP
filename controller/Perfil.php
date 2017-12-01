@@ -1,7 +1,7 @@
 <?php
 
-require_once './config/ConexionDB.php';
-require_once './model/PerfilModel.php';
+include_once "../config/ConexionDB.php";
+include_once "../model/PerfilModel.php";
 
 class Perfil {
 

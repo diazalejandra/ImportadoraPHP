@@ -1,7 +1,7 @@
 <?php
 
-require_once './config/ConexionDB.php';
-require_once './model/UsuarioModel.php';
+include_once '../config/ConexionDB.php';
+include_once '../model/UsuarioModel.php';
 
 class Usuario {
 
