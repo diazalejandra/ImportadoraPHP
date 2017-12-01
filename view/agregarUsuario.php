@@ -33,6 +33,7 @@ if (isset($_POST['btn_registro'])) {
         <?php
         include_once 'partial/header.php';
         ?>
+        <section class="container">
         <form class="form-horizontal" action="" method="POST">
             <fieldset>
 
@@ -120,11 +121,53 @@ if (isset($_POST['btn_registro'])) {
                     <label class="col-md-4 control-label" for="btn_registro"></label>
                     <div class="col-md-4">
                         <button type="submit" id="btn_registro" name="btn_registro" class="btn btn-primary">Agregar</button>
+                        <button id="btn_listar" type="button" name="btn_listar" class="btn btn-primary">Listar</button>
                     </div>
                 </div>
 
             </fieldset>
         </form>
+        <div class="resultado"></div>
+    </section>
 
-    </body>
+    <script>
+        $(document).ready(function () {
+
+            $("#btn_listar").on("click", function (event) {
+                agregar();
+            });
+
+            function agregar() {
+                var settings = {
+                    "url": "buscarUsuario.php",
+                    "method": "POST",
+                    "data": {"usuario": "usuario"}
+                }
+
+                $.ajax(settings).done(function (response) {
+                    $('.resultado').html('');
+                    $('.resultado').html(response)
+                    eliminar();
+                });
+            }
+
+            function eliminar() {
+                $(".btn_eliminar").on("click", function (e) {
+                    var id = $(this).attr("attr-id");
+                    var settings = {
+                        "url": "buscarUsuario.php",
+                        "method": "POST",
+                        "data": {"id_usuario": id}
+                    }
+
+                    $.ajax(settings).done(function (response) {
+//                        $('.resultadoEli').html('');
+//                        $('.resultadoEli').html(response)
+                        agregar();
+                    });
+                });
+            }
+        });
+    </script>
+</body>
 </html>
