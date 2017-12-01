@@ -25,7 +25,6 @@ CREATE TABLE `detalle_oc` (
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `sub_total` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_oc`,`id_producto`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `detalle_oc` */

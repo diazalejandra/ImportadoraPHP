@@ -3,8 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/css/login.css</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/agregarOC.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/agregarPerfil.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/agregarTipoProducto.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/controller/TipoProducto.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/listaTop.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/buscarUsuario.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/controller/OrdenCompra.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/controller/Producto.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/model/ProductoModel.php</file>
             <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/index.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/partial/footer.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/partial/header.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/model/OrdenCompraModel.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/home.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/controller/DetalleOC.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/listaTopOC.php</file>
+            <file>file:/C:/Users/ygtha/Documents/NetBeansProjects/ImportadoraPHP/view/buscarOC.php</file>
         </group>
     </open-files>
 </project-private>
