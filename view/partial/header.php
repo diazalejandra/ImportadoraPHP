@@ -2,13 +2,15 @@
 if (isset($_SESSION['userlogin'])){
 $usuario = $_SESSION['userlogin'];}
 else{
-    $usuario = "Usuario";
+    session_start();
+    $usuario = $_SESSION['userlogin'];
+    //$usuario = "Usuario";
 }
 
-//else{
-//    header("Location: ../index.php");
+if($_SESSION['userlogin'] == null){
+    header("Location: ../index.php");
 //die();
-//}
+}
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -19,8 +21,8 @@ else{
 <script>
     $(document).ready(function () {
         $("#cerrar_sesion").click(function (evento) {
-            <?php unset($_SESSION["usuario"]);
-                  //session_destroy();
+            <?php $_SESSION["usuario"] == null;
+//                  session_destroy();
             ?>
             $(location).attr('href', '../index.php')
         });
@@ -43,7 +45,7 @@ else{
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="./home.php">Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="./agregarOC.php">Ingresar OC</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenedores <span class="caret"></span></a>
@@ -58,8 +60,8 @@ else{
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Top Productos</a></li>
-                        <li><a href="#">Top OC por fecha</a></li>
+                        <li><a href="./listaTop.php">Top Productos</a></li>
+                        <li><a href="./listaTopOC.php">Top OC por fecha</a></li>
                     </ul>
                 </li>
             </ul>

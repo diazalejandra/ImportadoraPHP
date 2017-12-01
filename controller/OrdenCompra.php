@@ -11,6 +11,7 @@ class OrdenCompra {
             $stmt = $pdo->prepare("SELECT id_oc, fecha_emision, total_oc, estado, id_usuario FROM orden_compra");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
+            $lista = [];
 
             foreach ($resultado as $value) {
                 $dto = new OrdenCompraModel();
@@ -32,7 +33,7 @@ class OrdenCompra {
             $db = new ConexionDB();
             $id_oc = $dto->getId_oc();
             $fecha_emision = $dto->getFecha_emision();
-            $total_oc = $dto->total_oc();
+            $total_oc = $dto->getTotal_oc();
             $estado = $dto->getEstado();
             $id_usuario = $dto->getId_usuario();
             
@@ -104,6 +105,45 @@ class OrdenCompra {
             echo "Error: " . $ex->getMessage();
         }
         return false;
+    }
+    
+        public static function obtenerId() {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT id_oc FROM orden_compra limit 1");
+            $stmt->execute();
+            $resultado = $stmt->fetch();
+            $dto = new OrdenCompraModel();
+            $dto->setId_oc($resultado["id_oc"]);
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $dto->getId_oc();
+    }
+    
+           public static function listarTop() {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT id_oc, count(fecha_emision) as ventas, fecha_emision, total_oc, estado,"
+                    . " id_usuario FROM orden_compra group by fecha_emision order by count(fecha_emision) desc");
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            $lista = [];
+
+            foreach ($resultado as $value) {
+                $dto = new OrdenCompraModel();
+                $dto->setId_oc($value["id_oc"]);
+                $dto->setVentas($value["ventas"]);
+                $dto->setFecha_emision($value["fecha_emision"]);
+                $dto->setTotal_oc($value["total_oc"]);
+                $dto->setEstado($value["estado"]);
+                $dto->setId_usuario($value["id_usuario"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
     }
 }
 

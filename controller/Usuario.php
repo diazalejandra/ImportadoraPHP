@@ -12,7 +12,8 @@ class Usuario {
                     . " edad_usuario, codigo_perfil, fechaNacimiento_usuario FROM usuario");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
+            
             foreach ($resultado as $value) {
                 $dto = new UsuarioModel();
                 $dto->setId_usuario($value["id_usuario"]);

@@ -6,6 +6,7 @@ class ProductoModel implements JsonSerializable {
     private $descripcion;
     private $precio_unidad;
     private $id_tipo;
+    private $ventas;
     
     function __construct() {       
     }
@@ -40,6 +41,14 @@ class ProductoModel implements JsonSerializable {
 
     function setId_tipo($id_tipo) {
         $this->id_tipo = $id_tipo;
+    }
+    
+    function getVentas() {
+        return $this->ventas;
+    }
+
+    function setVentas($ventas) {
+        $this->ventas = $ventas;
     }
   
     public function jsonSerialize() {

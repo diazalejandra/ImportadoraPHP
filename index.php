@@ -26,7 +26,7 @@
                                 </div>
                                 <button type="submit" name="btn_login" class="btn btn-default btn_style">INGRESAR</button>                            
                             </form>
-                            <div class="register">¿No tiene una cuenta? <a href="registro.php">Regístrese</a></div>
+                            <div class="register">¿No tiene una cuenta? <a href="./view/registro.php">Regístrese</a></div>
                         </section>    
                     </div>
                 </div>

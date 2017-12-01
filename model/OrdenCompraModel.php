@@ -7,6 +7,7 @@ class OrdenCompraModel implements JsonSerializable {
     private $total_oc;
     private $estado;
     private $id_usuario;
+    private $ventas;
 
     function __construct() {
         
@@ -50,6 +51,14 @@ class OrdenCompraModel implements JsonSerializable {
 
     function setId_usuario($id_usuario) {
         $this->id_usuario = $id_usuario;
+    }
+    
+    function getVentas() {
+        return $this->ventas;
+    }
+
+    function setVentas($ventas) {
+        $this->ventas = $ventas;
     }
 
     public function jsonSerialize() {

@@ -1,7 +1,7 @@
 <?php
 
 require_once '../config/ConexionDB.php';
-require_once '../model/DetalleOCModel.php.php';
+require_once '../model/DetalleOCModel.php';
 
 class DetalleOC {
 
@@ -11,7 +11,8 @@ class DetalleOC {
             $stmt = $pdo->prepare("SELECT id_oc, id_producto, cantidad, sub_total FROM detalle_oc");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
+            
             foreach ($resultado as $value) {
                 $dto = new DetalleOC();
                 $dto->setId_oc($value["id_oc"]);
@@ -46,12 +47,11 @@ class DetalleOC {
         return false;
     }
 
-    public static function eliminar($id_oc, $id_producto) {
+    public static function eliminar($id_oc) {
         try {
             $pdo = new ConexionDB();
-            $stmt = $pdo->prepare("DELETE FROM detalle_oc WHERE id_oc = ? and id_producto = ?");
+            $stmt = $pdo->prepare("DELETE FROM detalle_oc WHERE id_oc = ?");
             $stmt->bindParam(1, $id_oc);
-            $stmt->bindParam(2, $id_producto);
             $respuesta = $stmt->execute();
         } catch (Exception $exc) {
             $respuesta = false;

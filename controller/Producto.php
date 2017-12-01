@@ -98,4 +98,30 @@ class Producto {
         }
         return false;
     }
+    
+        public static function listarTop() {
+        try {
+            $pdo = new ConexionDB();
+            $stmt = $pdo->prepare("SELECT ifnull(count(det.id_producto),0) as ventas, pro.id_producto as id_producto,"
+                    . " pro.descripcion as descripcion, pro.precio_unidad as precio_unidad,"
+                    . " pro.id_tipo as id_tipo FROM producto pro left JOIN detalle_oc det on pro.id_producto = det.id_producto"
+                    . " order by count(det.id_producto) desc");
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            $lista = [];
+
+            foreach ($resultado as $value) {
+                $dto = new ProductoModel();
+                $dto->setId_producto($value["id_producto"]);
+                $dto->setDescripcion($value["descripcion"]);
+                $dto->setPrecio_unidad($value["precio_unidad"]);
+                $dto->setId_tipo($value["id_tipo"]);
+                $dto->setVentas($value["ventas"]);
+                $lista[] = $dto;
+            }
+        } catch (Exception $ex) {
+            echo "Error: " . $ex->getMessage();
+        }
+        return $lista;
+    }
 }

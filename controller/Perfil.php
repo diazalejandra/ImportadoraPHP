@@ -11,7 +11,7 @@ class Perfil {
             $stmt = $pdo->prepare("SELECT id_perfil, descripcion_perfil FROM perfil");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
-
+            $lista = [];
             foreach ($resultado as $value) {
                 $dto = new PerfilModel();
                 $dto->setId_perfil($value["id_perfil"]);
