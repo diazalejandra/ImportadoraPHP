@@ -51,7 +51,7 @@ else{
                         <li><a href="./agregarUsuario.php">Usuarios</a></li>
                         <li><a href="./agregarPerfil.php">Perfiles</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="./agregarProducto.php">Productos</a></li>
+                        <li><a href="./producto.php">Productos</a></li>
                         <li><a href="./tipoProducto.php">Tipos de Productos</a></li>
                     </ul>
                 </li>

@@ -11,6 +11,7 @@ class Producto {
             $stmt = $pdo->prepare("SELECT id_producto, descripcion, precio_unidad, id_tipo FROM producto");
             $stmt->execute();
             $resultado = $stmt->fetchAll();
+            $lista = [];
 
             foreach ($resultado as $value) {
                 $dto = new ProductoModel();
@@ -29,12 +30,11 @@ class Producto {
     public static function crear($dto) {
         try {
             $db = new ConexionDB();
-            $id_producto = $dto->getId_producto();
             $descripcion = $dto->getDescripcion();
             $precio_unidad = $dto->getPrecio_unidad();
             $id_tipo = $dto->getId_tipo();
 
-            $stmt = $db->prepare("INSERT INTO producto(descripcion, precio_unidad, id_tipo) VALUES(?,?,?,?)");
+            $stmt = $db->prepare("INSERT INTO producto(descripcion, precio_unidad, id_tipo) VALUES(?,?,?)");
             $stmt->bindParam(1, $descripcion);
             $stmt->bindParam(2, $precio_unidad);
             $stmt->bindParam(3, $id_tipo);
