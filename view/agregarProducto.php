@@ -6,7 +6,11 @@
     </head>
     <body>
         <?php
-         include_once './view/partial/header.php';
+        include_once 'partial/header.php';
+        ?>
+        
+        <?php
+        include_once 'partial/footer.php';
         ?>
     </body>
 </html>

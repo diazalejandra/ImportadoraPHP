@@ -79,7 +79,7 @@ if (isset($_POST['btn_registro'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="correo_usuario">Email</label>  
                     <div class="col-md-4">
-                        <input id="correo_usuario" name="correo_usuario" type="text" placeholder="" class="form-control input-md" required="">
+                        <input id="correo_usuario" name="correo_usuario" type="email" placeholder="" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -88,7 +88,7 @@ if (isset($_POST['btn_registro'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="edad_usuario">Edad</label>  
                     <div class="col-md-4">
-                        <input id="edad_usuario" name="edad_usuario" type="text" placeholder="" class="form-control input-md" required="">
+                        <input id="edad_usuario" name="edad_usuario" type="number" placeholder="" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -110,7 +110,7 @@ if (isset($_POST['btn_registro'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="fechaNacimiento_usuario">Fecha de Nacimiento</label>  
                     <div class="col-md-4">
-                        <input id="fechaNacimiento_usuario" name="fechaNacimiento_usuario" type="text" placeholder=" " class="form-control input-md" required="">
+                        <input id="fechaNacimiento_usuario" name="fechaNacimiento_usuario" type="date" placeholder=" " class="form-control input-md" required="">
                         <span class="help-block"> </span>  
                     </div>
                 </div>

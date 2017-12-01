@@ -44,15 +44,15 @@ else{
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Ingresar OC</a></li>
+                <li><a href="./agregarOC.php">Ingresar OC</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenedores <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Usuarios</a></li>
-                        <li><a href="#">Perfiles</a></li>
+                        <li><a href="./agregarUsuario.php">Usuarios</a></li>
+                        <li><a href="./agregarPerfil.php">Perfiles</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Órdenes de Compra</a></li>
-                        <li><a href="#">Productos</a></li>
+                        <li><a href="./agregarProducto.php">Productos</a></li>
+                        <li><a href="./agregarTipoProducto.php">Tipos de Productos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
